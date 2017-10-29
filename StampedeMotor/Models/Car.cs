@@ -8,10 +8,10 @@ namespace StampedeMotor.Models
 {
     public class Car
     {
-        public Car(Make make, Model model, byte[] image, string description, decimal price)
+        public Car(Make make, CarModel carModel, byte[] image, string description, decimal price)
         {
             Make = make ?? throw new ArgumentNullException();
-            Model = model ?? throw new ArgumentNullException();
+            CarModel = carModel ?? throw new ArgumentNullException();
             Image = image ?? throw new ArgumentNullException();
             Description = description ?? throw new ArgumentNullException();
             Price = price <= 0 ? throw new ArgumentOutOfRangeException() : price;
@@ -21,7 +21,7 @@ namespace StampedeMotor.Models
 
         public Make Make { get; }
 
-        public Model Model { get; }
+        public CarModel CarModel { get; }
 
         public byte[] Image { get; }
 

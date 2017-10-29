@@ -9,11 +9,11 @@ namespace StampedeMotor.Tests.Repositories
     [TestClass]
     public class ModelRepositoryTest
     {
-        private readonly ModelRepository _modelRepository;
+        private readonly CarModelRepository _carModelRepository;
 
         public ModelRepositoryTest()
         {
-            _modelRepository = new ModelRepository();
+            _carModelRepository = new CarModelRepository();
         }
 
         [TestInitialize]
@@ -25,55 +25,51 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void ModelRepository_TestAdd()
         {
-            var model = new Model("500");
+            var carModelVM = new CarModelViewModel("500");
 
-            _modelRepository.Add(model);
+            var carModel = _carModelRepository.Add(carModelVM);
 
-            Assert.IsTrue(model.Id > 0);
+            Assert.IsTrue(carModel.Id > 0);
         }
 
         [TestMethod]
-        public void TestGetAll()
+        public void ModelRepository_TestGetAll()
         {
-            var model = new Model("Test Model");
+            var carModelVM = new CarModelViewModel("Test CarModel");
 
-            _modelRepository.Add(model);
+            _carModelRepository.Add(carModelVM);
 
-            var makes = _modelRepository.GetAll();
+            var makes = _carModelRepository.GetAll();
 
             Assert.IsTrue(makes.Count > 0);
         }
 
         [TestMethod]
-        public void TestDelete()
+        public void ModelRepository_TestDelete()
         {
-            var make = new Model("Test Model");
+            var carModelVM = new CarModelViewModel("Test CarModel");
 
-            _modelRepository.Add(make);
-
-            var makes = _modelRepository.GetAll();
-
-            Assert.IsTrue(makes.Count > 0);
-
-            var rowsAffected = _modelRepository.Delete(makes.FirstOrDefault());
+            var newCarModel = _carModelRepository.Add(carModelVM);
+            
+            var rowsAffected = _carModelRepository.Delete(newCarModel);
 
             Assert.IsTrue(rowsAffected == 1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestAddWithNullArgument()
+        public void ModelRepository_TestAddWithNullArgument()
         {
-            _modelRepository.Add(null);
+            _carModelRepository.Add(null);
 
             Assert.Fail("Shouldn't get to this line.");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestDeleteWithNullArgument()
+        public void ModelRepository_TestDeleteWithNullArgument()
         {
-            _modelRepository.Delete(null);
+            _carModelRepository.Delete(null);
 
             Assert.Fail("Shouldn't get to this line.");
         }
@@ -84,11 +80,11 @@ namespace StampedeMotor.Tests.Repositories
         [TestCleanup]
         public void TearDown()
         {
-            //var models = _modelRepository.GetAll();
+            //var models = _carModelRepository.GetAll();
 
-            //foreach (var model in models)
+            //foreach (var carModel in models)
             //{
-            //     _modelRepository.Delete(model);
+            //     _carModelRepository.Delete(carModel);
             //}
         }
     }

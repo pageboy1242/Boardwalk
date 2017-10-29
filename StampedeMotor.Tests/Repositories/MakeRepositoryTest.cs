@@ -36,7 +36,7 @@ namespace StampedeMotor.Tests.Repositories
         }
 
         [TestMethod]
-        public void TestGetAll()
+        public void MakeRepository_TestGetAll()
         {
             var makeVM = new MakeViewModel("Test Make");
 
@@ -48,24 +48,20 @@ namespace StampedeMotor.Tests.Repositories
         }
 
         [TestMethod]
-        public void TestDelete()
+        public void MakeRepository_TestDelete()
         {
             var makeVM = new MakeViewModel("Test Make");
 
-            _makeRepository.Add(makeVM);
+            var newMake = _makeRepository.Add(makeVM);
 
-            var makes = _makeRepository.GetAll();
-
-            Assert.IsTrue(makes.Count > 0);
-
-            var rowsAffected = _makeRepository.Delete(makes.FirstOrDefault());
+            var rowsAffected = _makeRepository.Delete(newMake);
 
             Assert.IsTrue(rowsAffected == 1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestAddWithNullArgument()
+        public void MakeRepository_TestAddWithNullArgument()
         {
             _makeRepository.Add(null);
 
@@ -74,7 +70,7 @@ namespace StampedeMotor.Tests.Repositories
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void TestDeleteWithNullArgument()
+        public void MakeRepository_TestDeleteWithNullArgument()
         {
             _makeRepository.Delete(null);
 

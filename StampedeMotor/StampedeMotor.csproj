@@ -201,17 +201,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarModelViewModel.cs" />
     <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\MakeViewModel.cs" />
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\CarModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
     <Compile Include="Repositories\ICarRepository.cs" />
     <Compile Include="Repositories\IMakeRepository.cs" />
-    <Compile Include="Repositories\IModelRepository.cs" />
+    <Compile Include="Repositories\ICarModelRepository.cs" />
     <Compile Include="Repositories\MakeRepository.cs" />
-    <Compile Include="Repositories\ModelRepository.cs" />
+    <Compile Include="Repositories\CarModelRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\StampedeMotor.mdf" />

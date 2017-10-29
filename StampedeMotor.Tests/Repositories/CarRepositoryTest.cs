@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,11 +16,13 @@ namespace StampedeMotor.Tests.Repositories
     {
         [TestMethod]
         [DeploymentItem(@"Repositories")]
-        public void TestAdd()
+        public void CarRepository_TestAdd()
         {
             var carRepository = new CarRepository();
 
             var dir = Directory.GetCurrentDirectory();
+            Debug.WriteLine(dir);// Useful for debugging file path issues
+
             Image img = Image.FromFile(@"fiat-500.jpg");
 
             var converter = new ImageConverter();
@@ -29,11 +32,11 @@ namespace StampedeMotor.Tests.Repositories
             var makeRepository = new MakeRepository();
             var make = makeRepository.Add(makeVM);
 
-            var model = new Model("Test Model");
-            var modelRepository = new ModelRepository();
-            modelRepository.Add(model);
+            var carModelVM = new CarModelViewModel("Test CarModel");
+            var modelRepository = new CarModelRepository();
+            var carModel = modelRepository.Add(carModelVM);
 
-            var car = new Car(make, model, imageByteArray, "Test Car", 1000.00m);
+            var car = new Car(make, carModel, imageByteArray, "Test Car", 1000.00m);
 
             carRepository.Add(car);
         }

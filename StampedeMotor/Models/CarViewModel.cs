@@ -34,10 +34,10 @@ namespace StampedeMotor.Models
         {
             get
             {
-                var modelRepository = new ModelRepository();
+                var modelRepository = new CarModelRepository();
                 var models = modelRepository.GetAll().Select(a => new SelectListItem
                 {
-                    Text = a.Name,
+                    Text = a.ModelName,
                     Value = a.Id.ToString()
                 });
                 return models;

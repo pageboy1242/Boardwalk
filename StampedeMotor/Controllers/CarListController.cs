@@ -14,13 +14,13 @@ namespace StampedeMotor.Controllers
     {
         private ICarRepository _carRepository;
         private IMakeRepository _makeRepository;
-        private IModelRepository _modelRepository;
+        private ICarModelRepository _carModelRepository;
 
-        public CarListController(ICarRepository carRepository, IMakeRepository makeRepository, IModelRepository modelRepository)
+        public CarListController(ICarRepository carRepository, IMakeRepository makeRepository, ICarModelRepository carModelRepository)
         {
             _carRepository = carRepository;
             _makeRepository = makeRepository;
-            _modelRepository = modelRepository;
+            _carModelRepository = carModelRepository;
         }
 
         // GET: CarList REST API
@@ -61,7 +61,7 @@ namespace StampedeMotor.Controllers
 
                     var make = _makeRepository.Find(carViewModel.SelectedMakeId);
 
-                    var model = _modelRepository.Find(carViewModel.SelectedModelId);
+                    var model = _carModelRepository.Find(carViewModel.SelectedModelId);
 
                     var car = new Car(make, model, carViewModel.ImgBytes, carViewModel.Description, carViewModel.Price);
                     

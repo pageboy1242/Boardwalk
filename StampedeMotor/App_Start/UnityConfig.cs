@@ -16,7 +16,7 @@ namespace StampedeMotor
             
             container.RegisterType<ICarRepository, CarRepository>();
             container.RegisterType<IMakeRepository, MakeRepository>();
-            container.RegisterType<IModelRepository, ModelRepository>();
+            container.RegisterType<ICarModelRepository, CarModelRepository>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

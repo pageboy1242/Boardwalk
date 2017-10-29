@@ -36,7 +36,7 @@ namespace StampedeMotor.Repositories
                     while (oReader.Read())
                     {
                         var make = new Make((int)oReader["Id"], oReader["Make_Name"].ToString());
-                        var model = new Model(oReader["Model_Name"].ToString()) { Id = (int)oReader["Id"] };
+                        var model = new CarModel((int)oReader["Id"], oReader["Model_Name"].ToString());
 
                         var imageBytes = (byte[]) oReader["Image"];
                         
@@ -71,7 +71,7 @@ namespace StampedeMotor.Repositories
                 oCmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = car.Description;
                 oCmd.Parameters.Add("@Price", SqlDbType.SmallMoney).Value = car.Price;
                 oCmd.Parameters.Add("@Make_Id", SqlDbType.Int).Value = car.Make.Id;
-                oCmd.Parameters.Add("@Model_Id", SqlDbType.Int).Value = car.Model.Id;
+                oCmd.Parameters.Add("@Model_Id", SqlDbType.Int).Value = car.CarModel.Id;
 
                 myConnection.Open();
                 car.Id = (int)oCmd.ExecuteScalar();

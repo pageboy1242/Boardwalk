@@ -7,20 +7,20 @@ using Microsoft.Ajax.Utilities;
 
 namespace StampedeMotor.Models
 {
-    public class MakeViewModel
+    public class CarModelViewModel
     {
-        private string _makeName;
+        private string _modelName;
 
-        public MakeViewModel(string makeName)
+        public CarModelViewModel(string modelName)
         {
-            MakeName = makeName;
+            ModelName = modelName;
         }
 
         [Required]
-        public string MakeName
+        public string ModelName
         {
-            get => _makeName;
-            set => _makeName = value;
+            get => _modelName;
+            set => _modelName = value;
         }
     }
 }
