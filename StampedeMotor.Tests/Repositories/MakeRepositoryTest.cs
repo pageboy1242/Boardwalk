@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StampedeMotor.Models;
 using StampedeMotor.Repositories;
@@ -13,10 +13,12 @@ namespace StampedeMotor.Tests.Repositories
     public class MakeRepositoryTest
     {
         private readonly MakeRepository _makeRepository;
+        private List<Make> _testMakes;
 
         public MakeRepositoryTest()
         {
             _makeRepository = new MakeRepository();
+            _testMakes = new List<Make>();
         }
 
         [TestInitialize]
@@ -28,9 +30,10 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void MakeRepository_TestAdd()
         {
-            var makeVM = new MakeViewModel("Test Make");
-
-            var newMake = _makeRepository.Add(makeVM);
+            var makeVm = new MakeViewModel("Test Make");
+            
+            var newMake = _makeRepository.Add(makeVm);
+            _testMakes.Add(newMake);
 
             Assert.IsTrue(newMake.Id > 0);
         }
@@ -38,9 +41,10 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void MakeRepository_TestGetAll()
         {
-            var makeVM = new MakeViewModel("Test Make");
+            var makeVm = new MakeViewModel("Test Make");
 
-            _makeRepository.Add(makeVM);
+            var newMake = _makeRepository.Add(makeVm);
+            _testMakes.Add(newMake);
 
             var makes = _makeRepository.GetAll();
 
@@ -50,9 +54,9 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void MakeRepository_TestDelete()
         {
-            var makeVM = new MakeViewModel("Test Make");
+            var makeVm = new MakeViewModel("Test Make");
 
-            var newMake = _makeRepository.Add(makeVM);
+            var newMake = _makeRepository.Add(makeVm);
 
             var rowsAffected = _makeRepository.Delete(newMake);
 
@@ -83,12 +87,13 @@ namespace StampedeMotor.Tests.Repositories
         [TestCleanup]
         public void TearDown()
         {
-            //var makes = _makeRepository.GetAll();
-
-            //foreach (var make in makes)
-            //{
-            //    _makeRepository.Delete(make);
-            //}
+            foreach (var make in _testMakes)
+            {
+                if(make != null)
+                {
+                    _makeRepository.Delete(make);
+                }
+            }
         }
     }
 }

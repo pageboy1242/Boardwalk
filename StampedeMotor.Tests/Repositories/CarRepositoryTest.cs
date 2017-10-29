@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -14,6 +15,25 @@ namespace StampedeMotor.Tests.Repositories
     [TestClass]
     public class CarRepositoryTest
     {
+        private readonly CarRepository _carRepository;
+        private MakeRepository _makeRepository;
+        private CarModelRepository _carModelRepository;
+
+        private List<Make> _testMakes;
+        private List<CarModel> _testCarModels;
+        private List<Car> _testCars;
+
+        public CarRepositoryTest()
+        {
+            _carRepository = new CarRepository();
+            _makeRepository = new MakeRepository();
+            _carModelRepository = new CarModelRepository();
+
+            _testMakes = new List<Make>();
+            _testCarModels = new List<CarModel>();
+            _testCars = new List<Car>();
+        }
+
         [TestMethod]
         [DeploymentItem(@"Repositories")]
         public void CarRepository_TestAdd()
@@ -31,14 +51,17 @@ namespace StampedeMotor.Tests.Repositories
             var makeVM = new MakeViewModel("Test Make");
             var makeRepository = new MakeRepository();
             var make = makeRepository.Add(makeVM);
+            _testMakes.Add(make);
 
             var carModelVM = new CarModelViewModel("Test CarModel");
             var modelRepository = new CarModelRepository();
             var carModel = modelRepository.Add(carModelVM);
+            _testCarModels.Add(carModel);
 
             var car = new Car(make, carModel, imageByteArray, "Test Car", 1000.00m);
 
             carRepository.Add(car);
+            _testCars.Add(car);
         }
 
         [TestMethod]
@@ -54,7 +77,29 @@ namespace StampedeMotor.Tests.Repositories
         [TestCleanup]
         public void TearDown()
         {
-            
+            foreach (var car in _testCars)
+            {
+                if (car != null)
+                {
+                    _carRepository.Delete(car);
+                }
+            }
+
+            foreach (var make in _testMakes)
+            {
+                if (make != null)
+                {
+                    _makeRepository.Delete(make);
+                }
+            }
+
+            foreach (var carModel in _testCarModels)
+            {
+                if (carModel != null)
+                {
+                    _carModelRepository.Delete(carModel);
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StampedeMotor.Models;
@@ -10,10 +11,12 @@ namespace StampedeMotor.Tests.Repositories
     public class ModelRepositoryTest
     {
         private readonly CarModelRepository _carModelRepository;
+        private List<CarModel> _testCarModels;
 
         public ModelRepositoryTest()
         {
             _carModelRepository = new CarModelRepository();
+            _testCarModels = new List<CarModel>();
         }
 
         [TestInitialize]
@@ -25,9 +28,10 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void ModelRepository_TestAdd()
         {
-            var carModelVM = new CarModelViewModel("500");
+            var carModelVM = new CarModelViewModel("Test CarModel");
 
             var carModel = _carModelRepository.Add(carModelVM);
+            _testCarModels.Add(carModel);
 
             Assert.IsTrue(carModel.Id > 0);
         }
@@ -37,7 +41,8 @@ namespace StampedeMotor.Tests.Repositories
         {
             var carModelVM = new CarModelViewModel("Test CarModel");
 
-            _carModelRepository.Add(carModelVM);
+            var carModel = _carModelRepository.Add(carModelVM);
+            _testCarModels.Add(carModel);
 
             var makes = _carModelRepository.GetAll();
 
@@ -80,12 +85,11 @@ namespace StampedeMotor.Tests.Repositories
         [TestCleanup]
         public void TearDown()
         {
-            //var models = _carModelRepository.GetAll();
-
-            //foreach (var carModel in models)
-            //{
-            //     _carModelRepository.Delete(carModel);
-            //}
+            foreach (var carModel in _testCarModels)
+            {
+                if(carModel != null)
+                    _carModelRepository.Delete(carModel);
+            }
         }
     }
 }

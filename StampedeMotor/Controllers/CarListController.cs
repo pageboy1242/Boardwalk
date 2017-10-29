@@ -71,7 +71,15 @@ namespace StampedeMotor.Controllers
                     }
                     catch (Exception e)
                     {
-                        ModelState.AddModelError("", e.Message);
+                        if (e.Message.Contains("UQ"))
+                        {
+                            ModelState.AddModelError("",
+                                "A Car with the selected Make and Model combination already exists.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", e.Message);
+                        }
                         return View(carViewModel);
                     }
                     

@@ -96,7 +96,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CarListControllerTest.cs" />
+    <Compile Include="Models\CarModelTest.cs" />
     <Compile Include="Models\MakeTest.cs" />
+    <Compile Include="Models\CarTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Repositories\CarRepositoryTest.cs" />
