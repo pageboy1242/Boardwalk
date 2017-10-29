@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StampedeMotor.Models;
 using StampedeMotor.Repositories;
@@ -28,9 +27,9 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void ModelRepository_TestAdd()
         {
-            var carModelVM = new CarModelViewModel("Test CarModel");
+            var carModelVm = new CarModelViewModel("Test CarModel");
 
-            var carModel = _carModelRepository.Add(carModelVM);
+            var carModel = _carModelRepository.Add(carModelVm);
             _testCarModels.Add(carModel);
 
             Assert.IsTrue(carModel.Id > 0);
@@ -39,9 +38,9 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void ModelRepository_TestGetAll()
         {
-            var carModelVM = new CarModelViewModel("Test CarModel");
+            var carModelVm = new CarModelViewModel("Test CarModel");
 
-            var carModel = _carModelRepository.Add(carModelVM);
+            var carModel = _carModelRepository.Add(carModelVm);
             _testCarModels.Add(carModel);
 
             var makes = _carModelRepository.GetAll();
@@ -52,9 +51,9 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void ModelRepository_TestDelete()
         {
-            var carModelVM = new CarModelViewModel("Test CarModel");
+            var carModelVm = new CarModelViewModel("Test CarModel");
 
-            var newCarModel = _carModelRepository.Add(carModelVM);
+            var newCarModel = _carModelRepository.Add(carModelVm);
             
             var rowsAffected = _carModelRepository.Delete(newCarModel);
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -40,9 +38,9 @@ namespace StampedeMotor.Controllers
         }
 
         [HttpPost,ValidateAntiForgeryToken]
-        public ActionResult AddCar(CarViewModel carViewModel, string Create, HttpPostedFileBase fileUpload)
+        public ActionResult AddCar(CarViewModel carViewModel, string create, HttpPostedFileBase fileUpload)
         {
-            if (!string.IsNullOrEmpty(Create))
+            if (!string.IsNullOrEmpty(create))
             {
                 if (fileUpload == null || fileUpload.ContentLength == 0)
                 {

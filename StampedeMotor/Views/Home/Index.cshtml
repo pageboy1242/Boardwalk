@@ -22,8 +22,9 @@
 				var base64 = Convert.ToBase64String(car.Image);
 				var imgSrc = String.Format("data:image/png;base64,{0}", base64);
 			}
-			<img src="@imgSrc" class="img-responsive"/>
+			<img src="@imgSrc" alt="Car Image" class="img-responsive"/>
 		</div>
 	}
 </div>
+<br/>
 <p><a href="~/CarList/AddCar" class="btn btn-default">Add Car</a></p>
