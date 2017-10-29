@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StampedeMotor.Models;
+using StampedeMotor.Repositories;
 
 namespace StampedeMotor.Controllers
 {
@@ -10,21 +12,11 @@ namespace StampedeMotor.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            CarRepository carRepository = new CarRepository();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            List<Car> cars = carRepository.GetAll();
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(cars);
         }
     }
 }
