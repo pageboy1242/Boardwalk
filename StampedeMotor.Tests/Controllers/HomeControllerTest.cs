@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StampedeMotor;
+using Moq;
 using StampedeMotor.Controllers;
+using StampedeMotor.Repositories;
 
 namespace StampedeMotor.Tests.Controllers
 {
@@ -13,15 +10,18 @@ namespace StampedeMotor.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void HomeController_VerifyCallsGetAll()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var repositoryMock = new Mock<ICarRepository>();
+
+            var controller = new HomeController(repositoryMock.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
+            repositoryMock.Verify(m => m.GetAll());
             Assert.IsNotNull(result);
         }
     }

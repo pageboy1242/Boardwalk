@@ -12,13 +12,22 @@ namespace StampedeMotor.Controllers
 {
     public class CarListController : Controller
     {
+        private ICarRepository _carRepository;
+        private IMakeRepository _makeRepository;
+        private IModelRepository _modelRepository;
+
+        public CarListController(ICarRepository carRepository, IMakeRepository makeRepository, IModelRepository modelRepository)
+        {
+            _carRepository = carRepository;
+            _makeRepository = makeRepository;
+            _modelRepository = modelRepository;
+        }
+
         // GET: CarList REST API
         [OutputCache(Location = OutputCacheLocation.None)]
         public ActionResult CarList()
         {
-            CarRepository carRepository = new CarRepository();
-
-            List<Car> cars = carRepository.GetAll();
+           List<Car> cars = _carRepository.GetAll();
 
             return Json(cars, JsonRequestBehavior.AllowGet);
         }
@@ -50,18 +59,15 @@ namespace StampedeMotor.Controllers
                         }
                     }
 
-                    MakeRepository makeRepository = new MakeRepository();
-                    var make = makeRepository.Find(carViewModel.SelectedMakeId);
+                    var make = _makeRepository.Find(carViewModel.SelectedMakeId);
 
-                    ModelRepository modelRepository = new ModelRepository();
-                    var model = modelRepository.Find(carViewModel.SelectedModelId);
+                    var model = _modelRepository.Find(carViewModel.SelectedModelId);
 
                     var car = new Car(make, model, carViewModel.ImgBytes, carViewModel.Description, carViewModel.Price);
-                    var carRepository = new CarRepository();
-
+                    
                     try
                     {
-                        carRepository.Add(car);
+                        _carRepository.Add(car);
                     }
                     catch (Exception e)
                     {

@@ -8,7 +8,7 @@ using StampedeMotor.Models;
 
 namespace StampedeMotor.Repositories
 {
-    public class ModelRepository
+    public class ModelRepository : IModelRepository
     {
         /// <summary>
         /// Adds the specified Model object to the store

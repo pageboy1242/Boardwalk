@@ -8,14 +8,24 @@ namespace StampedeMotor.Models
 {
     public class Make
     {
-        public Make(string name)
+        private int _id;
+        private string _makeName;
+
+        public Make(int id, string name)
         {
-            Id = 0;
-            Name = name;
+            _id = id > 0 ? id : throw new ArgumentOutOfRangeException();
+            MakeName = name;
         }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get => _id;
+        }
 
-        public string Name { get; set; }
+        public string MakeName
+        {
+            get => _makeName;
+            set => _makeName = value;
+        }
     }
 }

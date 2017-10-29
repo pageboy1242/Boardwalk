@@ -20,7 +20,7 @@ namespace StampedeMotor.Models
                 var makeRepository = new MakeRepository();
                 var makes = makeRepository.GetAll().Select(a => new SelectListItem
                 {
-                    Text = a.Name,
+                    Text = a.MakeName,
                     Value = a.Id.ToString()
                 });
                 return makes;
@@ -54,7 +54,6 @@ namespace StampedeMotor.Models
 
         [Range(1,100000)]
         [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
         public decimal Price { get; set; }
     }
 }

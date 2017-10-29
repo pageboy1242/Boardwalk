@@ -10,11 +10,16 @@ namespace StampedeMotor.Controllers
 {
     public class HomeController : Controller
     {
+        private ICarRepository _carRepository;
+
+        public HomeController(ICarRepository carRepository)
+        {
+            _carRepository = carRepository;
+        }
+
         public ActionResult Index()
         {
-            CarRepository carRepository = new CarRepository();
-
-            List<Car> cars = carRepository.GetAll();
+           List<Car> cars = _carRepository.GetAll();
 
             return View(cars);
         }

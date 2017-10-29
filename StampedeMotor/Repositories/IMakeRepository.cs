@@ -9,7 +9,7 @@ namespace StampedeMotor.Repositories
 {
     public interface IMakeRepository
     {
-        void Add(Make make);
+        Make Add(MakeViewModel makeViewModel);
         int Delete(Make make);
         List<Make> GetAll();
         Make Find(int id);

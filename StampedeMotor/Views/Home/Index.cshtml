@@ -12,7 +12,7 @@
 	@foreach (var car in Model)
 	{
 		<div class="col-12 col-sm-6 col-lg-4">
-			<h3>@car.Make.Name @car.Model.Name</h3>
+			<h3>@car.Make.MakeName @car.Model.Name</h3>
 			<p>@car.Price.ToString("C")</p>
 			<p>
 				@car.Description

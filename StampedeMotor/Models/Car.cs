@@ -12,21 +12,21 @@ namespace StampedeMotor.Models
         {
             Make = make ?? throw new ArgumentNullException();
             Model = model ?? throw new ArgumentNullException();
-            Image = image;
-            Description = description;
-            Price = price;
+            Image = image ?? throw new ArgumentNullException();
+            Description = description ?? throw new ArgumentNullException();
+            Price = price <= 0 ? throw new ArgumentOutOfRangeException() : price;
         }
 
         public int Id { get; set; }
 
-        public Make Make { get; set; }
+        public Make Make { get; }
 
-        public Model Model { get; set; }
+        public Model Model { get; }
 
-        public byte[] Image { get; set; }
+        public byte[] Image { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
 
-        public decimal Price { get; set; }
+        public decimal Price { get; }
     }
 }

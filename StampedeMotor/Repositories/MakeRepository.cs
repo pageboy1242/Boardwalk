@@ -10,24 +10,31 @@ namespace StampedeMotor.Repositories
 {
     public class MakeRepository : IMakeRepository
     {
-        public void Add(Make make)
+        /// <summary>
+        /// Adds a new Make from a viewModel to the object store and returns the new Make
+        /// </summary>
+        /// <param name="makeViewModel"></param>
+        /// <returns>Make object instance</returns>
+        public Make Add(MakeViewModel makeViewModel)
         {
-            if(make == null)
+            if(makeViewModel == null)
                 throw new ArgumentNullException();
 
             var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
-
+            Make newMake = null;
             using (var myConnection = new SqlConnection(con))
             {
                 const string oString = "INSERT INTO Makes (Make_Name) output INSERTED.ID VALUES (@Name)";
                 var oCmd = new SqlCommand(oString, myConnection);
                 
-                oCmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = make.Name;
+                oCmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = makeViewModel.MakeName;
                 
                 myConnection.Open();
-                make.Id = (int) oCmd.ExecuteScalar();
+                var db_id = (int) oCmd.ExecuteScalar();
                 myConnection.Close();
+                newMake = new Make(db_id, makeViewModel.MakeName);
             }
+            return newMake;
         }
 
         /// <summary>
@@ -60,7 +67,10 @@ namespace StampedeMotor.Repositories
             }
             return rowsAffected;
         }
-
+        /// <summary>
+        /// Gets all Makes from the object store
+        /// </summary>
+        /// <returns>List of Makes</returns>
         public List<Make> GetAll()
         {
             var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
@@ -76,7 +86,7 @@ namespace StampedeMotor.Repositories
                 {
                     while (oReader.Read())
                     {
-                        var make = new Make(oReader["Make_Name"].ToString()) {Id = (int) oReader["Id"]};
+                        var make = new Make((int)oReader["Id"], oReader["Make_Name"].ToString());
                         makes.Add(make);
                     }
 
@@ -85,7 +95,11 @@ namespace StampedeMotor.Repositories
             }
             return makes;
         }
-
+        /// <summary>
+        /// returns the Make object identified by the specified Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Make</returns>
         public Make Find(int id)
         {
             var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
@@ -103,7 +117,7 @@ namespace StampedeMotor.Repositories
                 {
                     while (oReader.Read())
                     {
-                        var make = new Make(oReader["Make_Name"].ToString()) { Id = (int)oReader["Id"] };
+                        var make = new Make((int)oReader["Id"], oReader["Make_Name"].ToString());
                         makes.Add(make);
                     }
 

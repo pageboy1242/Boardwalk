@@ -16,9 +16,9 @@
 	    <div class="form-group">
 		    @Html.Label("Make", new { @class = "control-label col-md-2" })
 		    <div class="col-md-10">
-			    @Html.DropDownListFor(x => x.SelectedMakeId, 
-				    new SelectList(Model.Makes, "Value", "Text")
-				    )
+			    @Html.DropDownListFor(x => x.SelectedMakeId,
+					new SelectList(Model.Makes, "Value", "Text"), new { @class = "custom-dropdown__select custom-dropdown__select--white" }
+					)
 			    @Html.ValidationMessageFor(model => model.SelectedMakeId, "", new {@class = "text-danger"})
 		    </div>
 	    </div>
@@ -26,9 +26,9 @@
 	    <div class="form-group">
 		    @Html.Label("Model", new { @class = "control-label col-md-2" })
 		    <div class="col-md-10">
-			    @Html.DropDownListFor(x => x.SelectedModelId, 
-				    new SelectList(Model.Models, "Value", "Text")
-				    )
+			    @Html.DropDownListFor(x => x.SelectedModelId,
+					new SelectList(Model.Models, "Value", "Text"), new { @class = "custom-dropdown__select custom-dropdown__select--white" }
+					)
 			    @Html.ValidationMessageFor(model => model.SelectedModelId, "", new {@class = "text-danger"})
 		    </div>
 	    </div>

@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StampedeMotor.Models;
 using StampedeMotor.Repositories;
 
 namespace StampedeMotor.Tests.Repositories
 {
+    /// <summary>
+    /// Integration Tests
+    /// </summary>
     [TestClass]
     public class CarRepositoryTest
     {
         [TestMethod]
+        [DeploymentItem(@"Repositories")]
         public void TestAdd()
         {
             var carRepository = new CarRepository();
-            Image img = Image.FromFile("C:\\Boardwalk-Quadrus\\StampedeMotor.Tests\\Repositories\\aston-martin.jpg");
+
+            var dir = Directory.GetCurrentDirectory();
+            Image img = Image.FromFile(@"fiat-500.jpg");
 
             var converter = new ImageConverter();
             var imageByteArray = (byte[])converter.ConvertTo(img, typeof(byte[]));
 
-            var make = new Make("Test Make");
+            var makeVM = new MakeViewModel("Test Make");
             var makeRepository = new MakeRepository();
-            makeRepository.Add(make);
+            var make = makeRepository.Add(makeVM);
 
             var model = new Model("Test Model");
             var modelRepository = new ModelRepository();

@@ -28,19 +28,19 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void MakeRepository_TestAdd()
         {
-            var make = new Make("Fiat");
+            var makeVM = new MakeViewModel("Test Make");
 
-            _makeRepository.Add(make);
+            var newMake = _makeRepository.Add(makeVM);
 
-            Assert.IsTrue(make.Id > 0);
+            Assert.IsTrue(newMake.Id > 0);
         }
 
         [TestMethod]
         public void TestGetAll()
         {
-            var make = new Make("Test Make");
+            var makeVM = new MakeViewModel("Test Make");
 
-            _makeRepository.Add(make);
+            _makeRepository.Add(makeVM);
 
             var makes = _makeRepository.GetAll();
 
@@ -50,9 +50,9 @@ namespace StampedeMotor.Tests.Repositories
         [TestMethod]
         public void TestDelete()
         {
-            var make = new Make("Test Make");
+            var makeVM = new MakeViewModel("Test Make");
 
-            _makeRepository.Add(make);
+            _makeRepository.Add(makeVM);
 
             var makes = _makeRepository.GetAll();
 

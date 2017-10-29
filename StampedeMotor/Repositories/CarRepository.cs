@@ -35,7 +35,7 @@ namespace StampedeMotor.Repositories
                 {
                     while (oReader.Read())
                     {
-                        var make = new Make(oReader["Make_Name"].ToString()) { Id = (int)oReader["Id"] };
+                        var make = new Make((int)oReader["Id"], oReader["Make_Name"].ToString());
                         var model = new Model(oReader["Model_Name"].ToString()) { Id = (int)oReader["Id"] };
 
                         var imageBytes = (byte[]) oReader["Image"];
