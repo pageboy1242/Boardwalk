@@ -15,10 +15,14 @@
 
 - The app was built in Visual Studio 2017 and can be run in Visual Studio by opening the StampedeMotor.sln solution file and running the web project
 - There is a test project that will also be loaded.  All tests can be run using the Studio test runner.  Some of the tests are integration tests and will affect the database, the tests are responsible for cleaning up after themselves, but if they fail for some reason, manual data cleanup may be required.
+- Nuget packages are not included in the distribution and will have to be restored to build the project.
 
-- The 'Makes' and 'Models' in the system do not have a UI and so must be managed manually, the DB ships with some default data however and can be used for testing.
+*NOTE BEFORE RUNNING TESTS!!*
+- Update the database file path in StampedeMotor.Tests/app.config.  Change the default path from "C:\Boardwalk-Quadrus\StampedeMotor\App_Data\StampedeMotor.mdf" to your current local location of the extracted database.
 
 # Using the App
+
+- The 'Makes' and 'Models' in the system do not have a UI and so must be managed manually, the DB ships with some default data however and can be used for testing.
 
 - When started the application should start at the Home page (web site root URL).  It should display a welcome banner and 4 prealoaded cars
 - Below the car listing there is an "Add Car" button which can be used to add new cars to the system

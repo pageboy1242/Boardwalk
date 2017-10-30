@@ -105,6 +105,7 @@
     <Compile Include="Repositories\CarRepositoryTest.cs" />
     <Compile Include="Repositories\MakeRepositoryTest.cs" />
     <Compile Include="Repositories\ModelRepositoryTest.cs" />
+    <Compile Include="Repositories\RepositoryTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -124,6 +125,7 @@
       <Name>StampedeMotor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

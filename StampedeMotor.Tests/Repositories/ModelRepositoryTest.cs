@@ -7,7 +7,7 @@ using StampedeMotor.Repositories;
 namespace StampedeMotor.Tests.Repositories
 {
     [TestClass]
-    public class ModelRepositoryTest
+    public class ModelRepositoryTest : RepositoryTestBase
     {
         private readonly CarModelRepository _carModelRepository;
         private List<CarModel> _testCarModels;

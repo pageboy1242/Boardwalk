@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using StampedeMotor.Models;
 
@@ -22,6 +23,7 @@ namespace StampedeMotor.Repositories
             var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
 
             CarModel carModel = null;
+            
             using (var myConnection = new SqlConnection(con))
             {
                 const string oString = "INSERT INTO Models (Model_Name) output INSERTED.ID VALUES (@Name)";
@@ -78,6 +80,7 @@ namespace StampedeMotor.Repositories
             var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
 
             var models = new List<CarModel>();
+            
             using (var myConnection = new SqlConnection(con))
             {
                 const string oString = "SELECT * FROM Models";

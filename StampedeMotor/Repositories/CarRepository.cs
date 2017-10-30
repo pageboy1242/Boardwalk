@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using System.Web;
 using StampedeMotor.Models;
 
 namespace StampedeMotor.Repositories
@@ -13,8 +14,8 @@ namespace StampedeMotor.Repositories
     {
         public List<Car> GetAll()
         {
-           var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
-
+            var con = ConfigurationManager.ConnectionStrings["StampedeMotorsDB"].ToString();
+            
             var cars = new List<Car>();
             using (var myConnection = new SqlConnection(con))
             {

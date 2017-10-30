@@ -17,6 +17,10 @@ namespace StampedeMotor
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
+
+            string path = HttpContext.Current.Server.MapPath("~/App_Data");  // Machine independent path to data
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
         }
     }
 }

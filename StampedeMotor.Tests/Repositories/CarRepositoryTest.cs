@@ -13,7 +13,7 @@ namespace StampedeMotor.Tests.Repositories
     /// Integration Tests
     /// </summary>
     [TestClass]
-    public class CarRepositoryTest
+    public class CarRepositoryTest : RepositoryTestBase
     {
         private readonly CarRepository _carRepository;
         private MakeRepository _makeRepository;
